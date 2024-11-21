@@ -56,8 +56,33 @@
                              Pug is a clean, whitespace sensitive syntax for writing html 
 
                              To install Pug the command is npm i pug 
+                             views ane folder lo home.pug ane file ni create chesukovali 
+                             home.pug lo html code rasukovali
 
-                         
+                             tarvatha mana server.js lo 
+                                   app.set('view engine', 'pug')
+                             
+                             app.get('/', function(req, res){
+                                res.render('home')
+                              })
+
+                            manam aa home.pug ki data pampochu 
+
+                            app.get('/', function(req, res){
+                                res.render('home' {students : ['mutyam', 'Bhargav' 'Reddy']})
+                              }) 
+
+                    pug lo ela rastam code manam ==> 
+
+                         html 
+                           head 
+                             title  Mutyam 
+                               body 
+                                 h1 Welcome hero 
+
+
+                               
+
 
             </code>
         </pre>
