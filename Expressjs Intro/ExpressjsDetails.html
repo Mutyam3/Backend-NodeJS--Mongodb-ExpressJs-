@@ -19,6 +19,44 @@
                                mana application run cheyaniki manaki oka server oka port kavali alagae application ni kooda create chesukovali 
                                [ express ki oka app create chesukoni aa app ni 4500/5600/8080 ] only use 4000 series and 8000 series unna port meda 
                                run cheyali. 
+
+                               router antam vettini ila raste ela ante app.get('/', function(){}) ==> ante / isthe aa function execute aithadi
+                               aa call back function ki req and res object lu express js create chesi isthai [express req, res modify chesi isthadi ante req ragane marchi manaki req isthadi ]
+                               req pampisthe req lo ki velthadi ade res ni ivvali ante res lo untai 
+                               ee expressjs vala mana if else lu rayakunda respective path ni req lo tesukoni daniki respective call back function trigger ayy response isthundi
+                              [particular path eh router ki match aithado choosi aa function ni trigger aithadi ]
+
+                                app.get('/', function(req, res){
+
+                                        res.send('hello world')
+                                 })
+
+                                 app.get('/add/:fn/:ln', function(req, res){
+
+                                    var num1 = + req.params.fn 
+                                    var num2 = + req.params.ln
+                                    var addNumbers = num1 + num2 
+                                    res.send(addNumbers.toString())
+                                
+                                })
+                                
+                                
+                                app.get('/studentshome' , function(req, res)
+                                {
+                                       res.sendFile(__dirname+'/students.html') // ikkada __dirname enduku ante current directory lo unnam ga andhuke
+                                })
+
+
+                    ABOUT PUG : 
+                    ---------- 
+
+                             PUG is a high performance template engine heavily influenced by HTML and implemented with 
+                             Javascript for Node.js and browsers. 
+
+                             Pug is a clean, whitespace sensitive syntax for writing html 
+
+                             To install Pug the command is npm i pug 
+
                          
 
             </code>
