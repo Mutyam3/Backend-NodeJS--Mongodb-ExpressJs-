@@ -1,8 +1,9 @@
 {
-  "scripts" : {
-         "start" : "nodemon server.js"
+  "scripts": {
+    "start": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "pug": "^3.0.3"
   }
 }
