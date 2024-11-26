@@ -124,7 +124,24 @@
                        appudu backend pani endi raa ante only database nunchi data ni tevatame dani pani vatine webapi's antaru.
 
                   Vere or eh server nunchi kooda request ravali accept cheyali mana server ante we need to install cors module/package
-                  
+
+
+
+                  Middleware ni ela rasukuntam ante  
+                      app.use((req, res)=>{
+
+                      })
+                    ee middleware execute chesina tarvathane next routes execute aithai 
+                    ante idi apothadi next daniki velakunda so next daniki velalai ante next object ni use cheyali 
+                    app.use((req, res, next)=>{   // here express manaki inko object ni isthadi ade next 
+                      res.send('aagu nayana')
+                      next()
+                    })
+
+                    ippudu ee middleware tarvatha unna routes ni execute chestadi 
+
+                    middleware ni configure kooda cheyochu 
+                    
 
 
 
