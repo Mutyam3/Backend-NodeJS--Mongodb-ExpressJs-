@@ -7,14 +7,15 @@ var cors = require('cors')
 app.use(cors()) // dini valana vere server nunchi request lani accept chesukovochu + only mana server nunchi vache request ne accept chesukunela chesukovchu by configure using header origin..
 
 var bodyParser = require('body-parser')
-
+var reviewRouter = require('./routes/review.routes')
 
 app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({extended:false})) // middlewares ni use chesyaniki manam import chesukunaka app.use ane medthod ni call chesi dantlo mana bodyparser ane middleware ni ivvali 
 app.use(express.static(__dirname+'/Images'))  // by this we can make use of more than one static folders so anni oka folder lo kakunda ila use chesukovochu 
 app.use(express.static(__dirname+ '/Public'))  // ila configure chestene work aithadi ela ante manaki request ragane ee madhyalo dhoore middleware uu check chestadi ichina request uh public folder lo unda leda ani 
-                                               // unte akkadinunchi [public folder nunchi] pampistadi 
+                                           // unte akkadinunchi [public folder nunchi] pampistadi 
 // ila static folders ni configure chestam 
+app.use('/reviews', reviewRouter) // request /reviews ragane reviewRouter loki velthadi akkada / lo unna code execute aithadi 
 
 // routes antam vettini ila raste ela ante app.get('/', function(){}) ==> ante / isthe aa function execute aithadi
 // aa call back function ki req and res object lu express js create chesi isthai [express req, res modify chesi isthadi ante req ragane marchi manaki req isthadi ]
@@ -22,10 +23,10 @@ app.use(express.static(__dirname+ '/Public'))  // ila configure chestene work ai
 // ee expressjs vala mana if else lu rayakunda respective path ni req lo tesukoni daniki respective call back function trigger ayy response isthundi
 // [particular path eh router ki match aithado choosi aa function ni trigger aithadi ]
 
-app.get('/', function(req, res){
-       var reviews = JSON.parse(fs.readFileSync('review.txt').toString()) //  fs module textfile ni read chesi oka buffer lo isthadi dani manam string ga marchi Json.parse ni use chesi json format loki tesukuvastam
-       res.render('home' ,{ reviews, students : ['Mutyam', 'Bhargav', 'Reddy']}) // direct ga reviews rasa idi es6 advanced object literals dwara reviews ane key tho reviews create ayy values assign aithai 
-})
+// app.get('/', (req, res)=>{
+
+//        res.sendFile(__dirname + '/Public/home.html')
+// })  idi lekunda public lo index file ni pedithe direct ga / req vaste default ga pick chestadi
 
 // app.get('/Images01.png', (req, res)=>{
 
@@ -39,31 +40,7 @@ app.get('/', function(req, res){
     // ee public folder lo static folders ani manam ee public folder lo pettukovochu happy ga emaithe public folder lo unnayo vatini manam direct ga access chesukovochu 
 
 
-app.get('/deleteReview/:id', function(req,res)
-{
-       var reviews = JSON.parse(fs.readFileSync('review.txt').toString())
-       reviews.splice(req.params.id,1)
-       fs.writeFileSync('review.txt',JSON.stringify(reviews))
-       res.send('bossu nuvvu anukunnadi delete aindi')
-})
 
-app.post('/addReview', function(req,res){
-
-       console.log(req.body) // body lo mana data untadi 
-       var reviews = JSON.parse(fs.readFileSync('review.txt').toString())
-       reviews.push(req.body) // push chesinaka manam ippudu file ni replace cheyali kotha file ni  so adhi write tho chestam 
-
-       fs.writeFileSync('review.txt', JSON.stringify(reviews))
-
-       // form submit cheyagane post method use cheste payload lo data vastadi  aa data ni pick cheyaniki oka middleware kavali manaki bodyParser ane middleware default ga undi import chesukoni use hcesukotame 
-       res.send('mass raa form fill chesav')
-})
-
-app.get('/getReviewForm', function(req,res){
-
-        res.sendFile(__dirname+'/addReview.html')
-
-})
 
 app.get('/students', function(req, res){
 
