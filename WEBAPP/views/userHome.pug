@@ -1,0 +1,14 @@
+html 
+   head 
+      link(rel="stylesheet", href="bootstrap.min.css")
+     
+   body 
+      include  header.pug
+      ul
+         each post in details.posts 
+            li 
+               img(src=`${post.img}` width='200px')
+               h2= post.content 
+               i= post.date
+
+
