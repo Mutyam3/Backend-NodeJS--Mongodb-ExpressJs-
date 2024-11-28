@@ -143,6 +143,62 @@
                     middleware ni configure kooda cheyochu 
                     
 
+           ==>   COOKIES :
+                ----------- 
+                
+                  A cookie (also known as a web cookie or browser cookie) is a small piece of data a server sends to a user's web broswer 
+                  cookie anedi oka data  browser nunchi server ki request velthe  server aa data ni web broswer ki pampisthadi
+                  ila server nunchi cookies ni pampiyali ante oka middleware undali  dani kosam manam install cheyali 
+                  npm i cookie-parser 
+
+                  Cookies mana localhost/url lo domain ki bind aithai nuvvu eh port aina localhost meda run aina mana cookie matram aa localhost ki bind aithai 
+                  so default ga browser lo store chesukoni pettukuntadi permanent ga store chesukuntadi 
+
+                  ippudu localhost:4500/abc ki pampithe request browser nunchi  server ki request isthe app.get('/abc',(req, res)=>{res.cookies('mass', 'naa cookie')})
+                  manaki server uh response lo cookies ni browser ki isthadi browser store chesukoni pettukuntadi 
+                  ade localhost:4500/pqr ane request pampisthe browser nunchi server ki request velthadi akkada app.get('/pqr', (req, res)=>{req.cookies}) 
+                  ikkada manaki unna previous cookies pqr path request dwara velthadi kani adi cookies lo untadi ade req.cookies ane property loki raniki manaki oka middelware 
+                  ni use chestam ade app.use(cookieParser()) idi execute ayy request object lo cookie ane property lopala cookies ani oka object laga marchi unchukuntadi
+
+                  Cookies : Its a piece of data created by the server and will send it to a browser and there it will be stored inside the browser 
+                            These cookies will be sent to the server on every subsequent request to the same host 
+                            [ante eh host nunchi aithe aa cookies create ayy vachinayo aa host ki migitha eh request pampina sare cookies anevi veltha untai 
+                            aa cookies ni ela handle chestam ante cookieParser middleware tho chestam ]
+                  
+          ==>  AUTHENTICATION :  securing our routes using cookies 
+                            manam normal ga routes rasinavi anni public ga access aithunai so ala kakunda only authenticate users eh access ayyela 
+                            ela cheyochu so mana anni routes konni authenticate user ki access ayyela cheyali inkonni andariki access ayyela rayali anedi point 
+                            daniki manam cookies dwara ela chestamo choodam : 
+                            
+                            user uh login login ainapudu cookies anevi generate avvali 
+                            danikosam manam app.post('/login', (req, res)=>{
+                                    res.cookie('username', req.body.username)
+                                    res.cookie('password', req.body.password)   
+                            })
+
+                            migitha routes ani ikkada untai ... ila undatam vala easy ga public ga access chesukuntaru andaru so 
+                            dani kosam manam middleware ni use chestam adi block chestadi 
+                            ila rasukuntam 
+                                
+                            app.use((req, res, next)=>{
+                                 if(req.cookie.username)
+                                 {
+                                      next() // next unna routes ki velochu 
+                                 }
+                                 else 
+                                 {
+                                      res.sendFile('/login.html') // ane page ki redirect avvali 
+                                 }
+                            })
+
+                            ee middleware ekkada rastunam anedi kooda important eh so login route paina raste login route execute avvakundane 
+                            ee middleware execute avvatam vala manaki req.cookie.username undefined vastadi undefined vaste next route ki ranivadu 
+                            so ranivakapothe asal login route ke radu andhuke middleware ekkada pettalo important ekkada block cheyali ekkada block cheyakudadu ani 
+                            choosi pettali mana case lo middleware paina login route ni rasukunte saripothadi first adi execute aina tarvathe middleware execute aithadi 
+                            so appatiki cookies vastai kabbati undefined unadu so next() execute ayy next routes ki velthadi.
+
+
+
 
 
                                
