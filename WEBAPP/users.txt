@@ -1,0 +1,50 @@
+[
+    {
+        "username" : "Mutyam",
+        "password" : "123",
+        "posts" : [
+             {
+                "img" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZdmZIFCy3ViiRgOqlj8-Nz1zajieDs9XdvO-L-Jm2hxHlSwGcuT7iXww2u3aHYJLiY8Y&usqp=CAU",
+                "content" : "The Baby",
+                "date" : "11/5/2013"
+             }, 
+             {
+                "img" : "https://hips.hearstapps.com/hmg-prod/images/baby-animal-photos-65f9bc47971de.jpg?crop=0.668xw:1.00xh;0.167xw,0&resize=640:*",
+                "content" : "The Dog",
+                "date" : "10/2/2014"
+             }
+        ]
+    },
+    {
+        "username" : "Bhargav",
+        "password" : "123",
+         "posts" : [
+             {
+                "img" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK0Au6KMF9u-vu2fnUAZZCNLYxOXpfP9SRBQ&s",
+                "content" : "The Baby Polar Beer",
+                "date" : "3/7/2020"
+             }, 
+             {
+                "img" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTANmkrF_7zQoKRK5ys_e-ZUYj5cVbI1CmCTA&s",
+                "content" : "The Elephant",
+                "date" : "5/4/2010"
+             }
+        ]
+    }, 
+    {
+        "username" : "Mahesh",
+        "password" : "123",
+        "posts" : [
+             {
+                "img" : "https://www.humanesociety.org/sites/default/files/2018/08/fawn-deer-283005.jpg",
+                "content" : "The Deer",
+                "date" : "11/3/2011"
+             }, 
+             {
+                "img" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWgrMXODUOENyEMPL1eSoNEFZslSXUpUsDLA&s",
+                "content" : "The Zebra",
+                "date" : "12/8/2017"
+             }
+        ]
+    }
+]
