@@ -205,6 +205,25 @@
                                 session ane oka mechanism undi - as soon as manam oka website open cheyagane server em chestadi ante 
                                                                  oka unique session id ni browser ki pampisthadi 
                                                                  
+                                session ni configure cheyaniki manam first manaki express-session kavali 
+                                danikosam npm i express-session ni install cheyali 
+                                server.js lo 
+                                     var expressSession = require('express-session')
+                                         app.use(expressSession({
+                                          secret : 'mass ...', // secret key istham 
+                                          cookie : {maxAge : 60000}
+                                         }))
+                                     ila configure chesukunte 
+                                starting lo manam request pampisthe manaki oka cookies lo oka connect.id vastadi 
+                                ade vere tab lo open chesi same server ki pampisthe request appudu inko different connect.id ni isthadi 
+                                browser evi two different connections ani anukuntadi so same session id continue avvavu renditiki request same aina 
+                                manaki rendu tab lu unnai present scenario lo so oka tab ki oka session id maintain aithundi inko tab ki maroka session id 
+                                maintain aithundi so aa rendu tab la nunchi different different request lu velinatle gamanisthadi ippudu oka tab nunchi pani cheste 
+                                okala gurtisthadi vere tab lo pani cheste verodila gurtisthadi
+                                
+                                Benefit of the Session : 
+                                       
+                                          
 
 
                                
