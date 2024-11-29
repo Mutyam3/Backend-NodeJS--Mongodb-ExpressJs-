@@ -28,7 +28,7 @@ app.post('/login', (req, res)=>{
  })
 
 
-app.use((req, res)=>{
+app.use((req, res, next)=>{
 
     if(req.cookies.username)
     {
@@ -38,6 +38,7 @@ app.use((req, res)=>{
              res.cookie('username', req.body.username)
              res.cookie('password', req.body.password)
              res.render('userHome', {details:user})
+             
          }
         else 
         {
@@ -51,6 +52,8 @@ app.use((req, res)=>{
     }
 
 })
+
+
 app.get('/', (req, res)=>{
 
     res.sendFile('/login.html')
