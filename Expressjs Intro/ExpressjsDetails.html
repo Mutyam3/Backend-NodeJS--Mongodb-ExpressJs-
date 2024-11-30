@@ -222,8 +222,66 @@
                                 okala gurtisthadi vere tab lo pani cheste verodila gurtisthadi
                                 
                                 Benefit of the Session : 
-                                       
-                                          
+                                       oka tab nunchi refresh cheste appudu inkoka kotha session id create chesinatle 
+                                       maxAge value session id expire kooda aithadi [session id oka expire date kooda untadi ]
+                                       ah session id ni mana server uh remove chestadi
+                                       mana server ki enni request lu vachayo annitiki session id create avvavu 
+                                       different different  browsers / different different tabs ki different different session id's uh create aithai 
+                                       ala ani oka particular tab lo manam multiple request lu pampisthe prathi request ki session id create avvavu 
+                                  Note : server ni restart cheste old server meda unna old sessions anni remove aithai  
+
+                                 mana Cookie maxAge limit 1 minute untadi. 
+                                 manam session expires avvakamundu anni tabs lo run cheste same session id maintain chestadi 
+                                 browser close chesi open chesina sare same session id maintain avuthadi.
+                                 ila enduku ante because of maxAge
+
+                      ee sessionId maintain chesi mana login system ni maintain chesukovocha ? 
+
+
+                            session counts kooda chesukovochu 
+                                    app.use((req, res, next)=>{
+
+                                      // console.log(req.session)
+                                      // console.log(req.sessionID)
+                                      if(req.session.count){
+                                          req.session.count++
+                                      }
+                                      else 
+                                      {
+                                          req.session.count = 1   // session ki cunt ane property ni add chestunam 
+                                      }
+                                      console.log(req.session)
+                                      next()
+                                  })
+
+                                  app.use((req, res, next)=>{
+                                
+                                    if(req.session.username)
+                                    {
+                                        next()
+                                    }
+                                    else 
+                                    {
+                                        res.redirect('/login.html')
+                                    }
+                                    
+                                })
+
+                    Note : cookies lo session id untadi so req.cookie.username pamapka poina 
+                           cookie lo sessionid undi so prathi request ki ee cookie travel avuthune untadi 
+                           aa cookie lo unna session id ni tesukoni server uh evadu eh session idi aa session ki
+                           username unda ani check chesukoni undi kabbati aa path ni isthadi ledante redirect to login
+                           page.
+
+                           server restart cheste old sessionid anni pothai so redirect lo login page 
+                           mari pedda applications like gmail, linkedin emaina chinna changes jarigithe 
+                           server restart aithai kani mana sessionid ni valu database lo store chesukuntaru 
+                           avi update ainapudu sessions expire avvavu endhuku ante databse lo store chesinavi 
+                           session ni techukoni pettukuntadi 
+
+                           Token-based Mechanism kooda undi 
+
+                           
 
 
                                
