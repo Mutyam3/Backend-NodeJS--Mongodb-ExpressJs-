@@ -1,0 +1,5 @@
+
+
+C:\Users\Admin\Downloads\mongosh-2.3.4-win32-x64\mongosh-2.3.4-win32-x64\bin>mongosh %MDB_CONNECTION_STRING%
+
+
