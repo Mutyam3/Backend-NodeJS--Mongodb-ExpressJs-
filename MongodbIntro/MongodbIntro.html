@@ -1,0 +1,238 @@
+<html>
+    <head>
+        <title>
+            Mutyam ==> MongodbIntro
+        </title>
+    </head>
+
+    <body>
+
+        DBMS : 
+
+           Endhuku ante file system disadvantage ==> file ni access cheyali ante saave endhuku ante oka data ni remove cheyali anna delete cheyali anna 
+                                                     manaki motham data ni techukoni motham modify chesi malli create cheyalsi vastadi 
+                                                     [for suppose : nenu oka data ni delete cheyali ante : 
+                                                                    fs module use chesi dani read file chesi dantlo unna data ni delete chesi splice tho 
+                                                                    malli file ni write cheyali ila procedure motham cheyalsi vastundi oka item ni delete cheyaniki]
+ 
+                                                     [mana deggara 20lakhs records unte vatini read chesi parse chesi find chesi modify chesi write chesi ila time taking process 
+                                                     so diniki check pettaniki ante best techniques manaki DBMS isthadi ]
+
+                    so File System efficient kadhu [long procedure untadi File System lo] so we use DBMS
+              ****  DBMS anedi oka software 
+
+              MYSQL ==> idi oka databse server data ni maintain cheyaniki 
+              ORACLE => idi kooda oka database management system 
+              POSTGRESQL 
+              MSACCESS
+              SQLSERVER
+              DB2
+
+              Above all are both database management systems 
+              SQL anedi language
+              
+              Veetini RDBMS Rleational Database management system 
+              ivi anni relationship maintain chestai ela ante entity dwara 
+
+              for example students related data antha oka table lo untai ade payment details anni inko table untai 
+              inkoti students-payment table maintain chestama ila relationship ga maintain chestam 
+
+              students Table lo student Details 
+              Payements Table lo entha chesaru , em bankaccount, eppudu chesaru ...
+              Student-Payment Table lo eh student id ki eh transaction jariginai 
+
+              Cricket database lo aithe each ball oka row laga maintain aithai 
+              tables/entities
+
+              Main Bank applications 
+
+              NOSQL
+              -------  
+               MongoDB - DBMS
+                  ikkada anni oka student details object lo ne untai anni payments and transactions details ani dentlo ne untai 
+                  students marks ni kooda maintain chesukovochu 
+
+               E-commerce lo aithe rendu vadtharu 
+               flat data motham mongodb 
+
+               Social media apps aithe mongodb ne use chestai 
+
+
+        MONGODB ATLAS ==> 
+
+                create cluster ==> cluster lo databases create chesukuntam 
+                cluster meda manam enni database la ana pettukovochu 
+
+           DBMS => Oka DBMS (software) mana computer lo install chesukunte multiple databases create chesukovochu 
+
+        **** DIFFERENCE BETWEEN DB AND DBMS :
+
+          => DBMS : is a software (program) which will allow us to create databases, collections and documents. 
+                  which is having a lot of other programs to maintain the data 
+
+          => DB : is the group of collections (collections means group of records)
+
+
+
+            DB-A ==> Tables => Rows  
+            DB-B 
+            ....
+            DB-Z
+
+            okoka database lo manaki tables untai tables => rows and columns untai 
+
+           MongoDB => MongoDB ane software lo kooda multiple databases ni create chesuovochu 
+           so basical ga ee databases ani oka cluster lo pettukuntaru 
+               
+           Clusters untai dantlo database untai 
+           database lopala multiple collections(mana baashalo array of objects untai) create chesukunam 
+           okoka collection(okoka collection ni document ani antaru) lo multiple objects untai 
+            
+
+           Cluster lo [eg: cluster0]
+                 create database [eg: MutyamDatabase]
+                      collection [eg: students]
+                         
+                
+        COMMANDS : 
+
+            Atlas atlas-gipz02-shard-0 [primary] test> ikkada test anedi oka database default one
+             
+            use database_name ==> ee command mana database ki shift aitham ante dini use chestunam manam present 
+
+            show databases ==> ee command yeni databases unnayo choopistai 
+
+            db ==> manam current eh databse lo unnamo choopistadi 
+
+            show collections ==> ee command mana database lo enni collections unnayo choopisthadi.
+
+            db.createCollection('collection_name') ==> ee command manaki current database(manam use chese database) lo collection ni create chestadi.
+                                                ex : db.createCollection('employees');
+
+            db.collection_name.insertOne({ key and properties ivvali }) ==>  ee command use chesi mana collection lo record ni insert chestam 
+                                                ex : db.employees.insertOne({firstname : 'Bhargav', lastname : 'Mutyam', gender: 'male', qual : 'btech'});
+                                                     output : {
+                                                        acknowledged: true,
+                                                        insertedId: ObjectId('674bfbd127eabf03e7893bf8')
+                                                      }
+
+            db.collection_name.find()  ==> ee command use cheste manaki collections lo enni records unte anni vastai 
+                                             ex : db.employees.find()
+                                                  or 
+                                                  db.employees.find({})
+
+            Note : To select or filter the data we use find method only 
+
+                ** Mongodb doesn't give any error 
+            
+            db.collection_name.find({filter select_criteria ivvali}) ==>  ee command manaki filter chesi isthadi mana brackets lo select creteria isthe 
+            
+            db.collection_name.find({gender:'Male', qual:'MBA'}) ==>  ee command manaki two conditions ni satisfy chesi isthadi ikkada , anedi && condition ga 
+                                                                      behave chestadi. 
+
+            or operator ela use cheyali ante 
+
+            Note : eh criteria aina manam curly brackets lo rayalsinde i.e object lo rayalsinde 
+
+            db.collection_name.find({ $or: [{},{}] }) ==> ee command use cheste manam edaina oka condition satisfy cheste chalu adi print aithadi. 
+                                                    ex : db.employees.find({$or: [{qual:'M.Tech'}, {qual: 'B.Tech'}, {qual: 'M.Sc'}]});
+
+            db.collection_name.delete() ==> ila isthe manaki delete is not a function ani vastadi so we use deleteOne() ani istham.
+            db.collection_name.deleteOne() here we need select criteria so we write our command with select criteria 
+
+            db.collection_name.deleteOne({select_criteria}) ==> ee command use cheste manaki delete aithadi record motham based on selection_criteria 
+                                                           ex : db.employees.deleteOne({firstname:'Jane'}) 
+                                                          output :  { acknowledged: true, deletedCount: 1 } => jane ane firstname tho unna record delete aindi
+
+             db.collection_name.deleteMany({select_criteria}) ==> ee commadn tho chala record ni manam delete cheyochu based on select criteria 
+                                                              ex : db.employees.deleteMany({qual:'MBA'})
+                                                              output : { acknowledged: true, deletedCount: 2 }
+
+             db.collection_name.deleteOne({_id:'674bffd927eabf03e7893c01'}) ==> ila isthe manaki output : { acknowledged: true, deletedCount: 0 } ila isthadi 
+                                                                  delete avvadu  manam id dwara delete cheyali anukunte ila rasukovali : 
+                                                                  
+              db.collection_name.deleteOne({_id:ObjectId('674bffd927eabf03e7893c01')}) ==> ila isthe manaki ee id tho unna record delete aithadi 
+
+                                                                     Ex: db.employees.deleteOne({_id: ObjectId('674bffd927eabf03e7893c01')});
+                       
+          
+              db.collection_name.updateOne({}, {$set:{}}) ==> ee command lo first {} emo em update cheyalo aa value istham second {} emo mana iche kotha value ni pettali with $set  
+                                                                   
+                                                                     Ex : db.employees.updateOne({firstname: 'Mutyam'}, {$set: {qual:'B.Tech'}});
+             
+                                                                       output : {
+                                                                        acknowledged: true,
+                                                                        insertedId: null,
+                                                                        matchedCount: 1,
+                                                                        modifiedCount: 1,
+                                                                        upsertedCount: 0
+                                                                      }
+                                                                set anedi use cheste aa particular key value eh update aithadi 
+
+              Nested vi access cheyali ante : 
+                    
+                          db.collection_name.find({loves: {$in: ['', '']}});  ==> ee command use cheste manaki nested lo unna items anni unna records print aithai
+
+                          db.collection_name.find({property_name : {$exists: true}}) ==> ee command use cheste aa property tho unna records anni print aithai eppudu ante exist true aithe 
+                                                                                        ade exist false aithe manaki aa property leni records print aithai 
+               
+                  
+               Mana Nodejs application ki mana mongodb ni coonect cheyaniki oka library ni use chestam ade 
+
+               Mongoose <--> ane library  
+                    ==>  data ni insert chese mundu mana data ni check cheyali correct format lo unda leda ani 
+                         so anni database cheyali ante load yekkuva aipothadi so dani pani veredi chestadi ade 
+                         mongoose manaki chesi isthadi adi ela chestadi ante : 
+
+                         mongoose anedi schema ni define chestadi ==> input iche data ni mana schema ki thaagatu ga unda leda ani choostadi
+                                                                      (manam annukuna format lo unda leda ani).
+                         mongoose manam database meda unna panlani better chestadi. 
+
+                Mongoose is a Object Data Modeling (ODM) library for MongoDB and Node.js. 
+                It provides a straightforward , Schema-based Solution to model Application data, with 
+                built-in type casting, validation, query building, and business logic hooks. 
+
+                Moongoose Install : npm i mongoose 
+                 
+                server.js lo : 
+
+                var mongoose = require('mongoose')
+                mongoose.connect('mongodb+srv://bhargavreddymutyam:Mutyam123@cluster0.wbkoq.mongodb.net/').then(()=>{
+                    console.log('connected to mongodb')
+                }).catch(()=>{
+                    console.log('not connected to mongodb')
+                })
+
+                first mana schema ni create chestam express js lo ..mongoose matram database lo tables create chestai 
+                express.js --> mongodb 99% ee way lo veltham 
+                first schema (express.js) tarvatha tables (database) create aithai. 
+                 
+                
+                        
+
+            
+
+
+
+
+
+
+
+                
+              
+               
+               
+                
+                  
+
+
+            
+
+
+
+              
+              
+
+
+    </body>
+</html>
