@@ -2,15 +2,23 @@ var express = require('express')
 var app = express()
 // var reviews = require('./reviews')
 var fs = require('fs')
+var mongoose = require('mongoose')
+mongoose.connect('mongodb+srv://bhargavreddymutyam:Mutyam123@cluster0.wbkoq.mongodb.net/MutyamDB').then(()=>{
+    console.log('connected to mongodb')
+}).catch(()=>{
+    console.log('not connected to mongodb')
+})
 var cors = require('cors')
 var users = JSON.parse(fs.readFileSync('users.txt').toString())
 app.use(cors()) // dini valana vere server nunchi request lani accept chesukovochu + only mana server nunchi vache request ne accept chesukunela chesukovchu by configure using header origin..
 
 var bodyParser = require('body-parser')
 var reviewRouter = require('./routes/review.routes')
+var employeeRouter = require('./routes/employees.routes')
 const cookieParser = require('cookie-parser')
-
+app.use(bodyParser.json())
 app.use(cookieParser())
+
 app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({extended:false})) // middlewares ni use chesyaniki manam import chesukunaka app.use ane medthod ni call chesi dantlo mana bodyparser ane middleware ni ivvali 
 app.use(express.static(__dirname+'/Images'))  // by this we can make use of more than one static folders so anni oka folder lo kakunda ila use chesukovochu 
@@ -41,6 +49,8 @@ app.use(express.static(__dirname+ '/Public'))  // ila configure chestene work ai
 // })  // ila prathi image ki request lu isthe jeevitham motham ide rayali ee gola lekunda manaki express em isthadi ante default ga public folder 
     // ee public folder lo static folders ani manam ee public folder lo pettukovochu happy ga emaithe public folder lo unnayo vatini manam direct ga access chesukovochu    
  
+app.use('/employees', employeeRouter)
+
 app.post('/login', (req, res)=>{
        res.cookie('username', req.body.username)
        res.cookie('password', req.body.password)
